@@ -2,7 +2,7 @@ Source: madbomber
 Section: user/games
 Priority: optional
 Maintainer: Mikko Vartiainen <mvartiainen@gmail.com>
-Build-Depends: debhelper (>> 5), libsdl1.2-dev (>=1.2.2-3.3), libsdl-mixer1.2-dev (>=1.2.1-2.2), libsdl-image1.2-dev (>=1.2.1-1.1), libosso-dev, sharutils, quilt, maemo-optify
+Build-Depends: debhelper (>> 5), libsdl1.2-dev (>=1.2.2-3.3), libsdl-mixer1.2-dev (>=1.2.1-2.2), libsdl-image1.2-dev (>=1.2.1-1.1), libosso-dev, sharutils, quilt
 Standards-Version: 3.7.3
 XSBC-Bugtracker: https://bugs.maemo.org/enter_bug.cgi?product=Mad%20Bomber
 
