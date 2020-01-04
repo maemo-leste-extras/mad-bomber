@@ -8,7 +8,7 @@ XSBC-Bugtracker: https://bugs.maemo.org/enter_bug.cgi?product=Mad%20Bomber
 
 Package: madbomber
 Architecture: any
-Depends: ${shlibs:Depends}, madbomber-data (= ${Source-Version}), suspendprocess
+Depends: ${shlibs:Depends}, madbomber-data (= ${source:Version}), suspendprocess
 Description: A Kaboom! clone
  "Mad Bomber" is a clone of Activision's classic Atari 2600 console
  game, "Kaboom!," by Larry Kaplan, with spruced-up graphics and
