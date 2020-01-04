@@ -1,0 +1,14 @@
+This package was debianized by Christian T. Steigies <cts@debian.org> on
+Fri, 21 Jan 2000 23:07:57 +0100
+
+It was downloaded from ftp.sonic.net:/pub/users/nbs/unix/x/madbomber
+See also http://www.newbreedsoftware.com/
+
+Upstream Author and Copyright: William (Bill) Kendrick <bill@newbreedsoftware.com>
+Copyright (c) 2000 - 2006 Bill Kendrick
+
+
+Mad Bomber is distributed under the GNU GENERAL PUBLIC LICENSE.
+
+On Debian GNU/Linux systems, the complete text of the GNU General Public 
+License is found in `/usr/share/common-licenses/GPL'.

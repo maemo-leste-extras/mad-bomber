@@ -1,0 +1,13 @@
+Index: madbomber-0.2.5/Makefile
+===================================================================
+--- madbomber-0.2.5.orig/Makefile	2009-08-15 02:54:17.130849697 +0300
++++ madbomber-0.2.5/Makefile	2009-08-15 02:54:35.671350096 +0300
+@@ -78,7 +78,7 @@
+ # Main executable:
+ 
+ $(TARGET):	madbomber.o
+-	$(CC) $(CFLAGS) madbomber.o -o $(TARGET) $(SDL_LIB) -lm
++	$(CC) $(CFLAGS) madbomber.o -o $(TARGET) $(SDL_LIB) -lm -lX11
+ 
+ 
+ # Main object:

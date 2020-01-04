@@ -1,0 +1,19 @@
+Index: madbomber-0.2.5/madbomber.c
+===================================================================
+--- madbomber-0.2.5.orig/madbomber.c	2009-10-29 21:08:49.000000000 +0000
++++ madbomber-0.2.5/madbomber.c	2009-10-29 21:09:43.000000000 +0000
+@@ -3213,11 +3213,11 @@
+   /* Close sound: */
+   
+ #ifndef NOSOUND
+-  if (use_sound == 1)
+-    Mix_CloseAudio();
++  //if (use_sound == 1)
++    //Mix_CloseAudio();
+ #endif
+   
+-  SDL_Quit();
++  //SDL_Quit();
+ }
+ 
+ 

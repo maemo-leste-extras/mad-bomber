@@ -1,0 +1,6 @@
+?package(madbomber):\
+  needs="x11"\
+  section="Games/Action"\
+  title="Mad Bomber"\
+  command="/usr/games/madbomber --fullscreen" \
+  icon="/usr/share/pixmaps/madbomber-icon.xpm"

@@ -1,0 +1,69 @@
+Index: madbomber-0.2.5/madbomber.c
+===================================================================
+--- madbomber-0.2.5.orig/madbomber.c	2009-09-11 01:19:48.390167858 +0300
++++ madbomber-0.2.5/madbomber.c	2009-09-11 01:38:31.550869146 +0300
+@@ -1501,7 +1501,7 @@
+ 	      
+ 	      key = event.key.keysym.sym;
+ 	      
+-	      if (key == SDLK_ESCAPE)
++	      if (key == SDLK_ESCAPE || key == SDLK_BACKSPACE)
+ 		{
+ 		  /* Escape: Quit the game and return to main menu: */
+ 		  
+@@ -1518,15 +1518,15 @@
+ 	      else if (key == SDLK_DOWN)
+ 		right_down = 1;
+ #endif
+-	      else if (key == SDLK_1)
++	      else if (key == SDLK_q)
+ 		bomber_left_left_down = 1;
+-	      else if (key == SDLK_2)
++	      else if (key == SDLK_w)
+ 		bomber_left_down = 1;
+-	      else if (key == SDLK_3)
++	      else if (key == SDLK_e)
+ 		bomber_right_down = 1;
+-	      else if (key == SDLK_4)
++	      else if (key == SDLK_r)
+ 		bomber_right_right_down = 1;
+-	      else if (key == SDLK_SPACE || key == SDLK_RETURN)
++	      else if (key == SDLK_SPACE || key == SDLK_RETURN || key == SDLK_KP_ENTER)
+ 		fire = 1;
+ 	      else if (key == SDLK_TAB || key == SDLK_p)
+ 		{
+@@ -1593,6 +1593,7 @@
+ 	      /* Mouse click - fire! */
+ 	      
+ 	      fire = 1;
++	      if (game_over) done = 1;
+ 	    }
+ 	  else if (event.type == SDL_QUIT)
+ 	    {
+@@ -2706,7 +2707,7 @@
+       
+       SDL_Delay(50);
+     }
+-  while (key != SDLK_RETURN && key != SDLK_SPACE && key != SDLK_ESCAPE);
++  while (key != SDLK_RETURN && key != SDLK_SPACE && key != SDLK_ESCAPE && key != SDLK_KP_ENTER);
+   
+   
+   /* Confirm sound! */
+@@ -3652,7 +3653,7 @@
+ #else
+ 	      else if (key == SDLK_DOWN || key == SDLK_UP ||
+ #endif
+-		       key == SDLK_SPACE || key == SDLK_RETURN)
++		       key == SDLK_SPACE || key == SDLK_RETURN || key == SDLK_KP_ENTER)
+ 		{
+ 		  /* Any of the keys control toggles: */
+ 		  
+@@ -5074,7 +5075,7 @@
+ 		      playsound(SND_SELECT, 0);
+ 		    }
+ 		}
+-	      else if (key == SDLK_RETURN)
++	      else if (key == SDLK_RETURN || key == SDLK_KP_ENTER)
+ 		{
+ 		  done = 1;
+ 		  playsound(SND_EXPLOSION, 0);

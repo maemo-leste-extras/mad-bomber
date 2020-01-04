@@ -1,0 +1,8 @@
+# format version number, currently 2; this line is compulsory!
+version=2
+
+# Site		Directory		Pattern			Version	Script
+#http://nbswebfx.com/downloads/madbomber-([\d\.]+)\.tar\.gz debian uupdate
+#ftp://ftp.sonic.net/pub/users/nbs/unix/x/madbomber/src/madbomber-([\d\.]+)\.tar\.gz debian uupdate
+
+ftp://ftp.billsgames.com/unix/x/madbomber/src/madbomber-([\d\.]+)\.tar\.gz debian uupdate

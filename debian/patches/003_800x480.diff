@@ -1,0 +1,763 @@
+Index: madbomber-0.2.5/madbomber.c
+===================================================================
+--- madbomber-0.2.5.orig/madbomber.c	2009-10-27 19:31:23.000000000 +0000
++++ madbomber-0.2.5/madbomber.c	2009-10-29 21:00:05.000000000 +0000
+@@ -886,7 +886,7 @@
+   /* (Use sound, by default): */
+   
+   use_sound = 1;
+-  use_fullscreen = 0;
++  use_fullscreen = 1;
+   
+   
+   /* Check for arguments: */
+@@ -1388,7 +1388,7 @@
+   
+   dest.x = 0;
+   dest.y = 0;
+-  dest.w = 640;
++  dest.w = 800;
+   dest.h = 480;
+   erase(dest);
+   
+@@ -1425,8 +1425,8 @@
+   
+   player = 0;
+   
+-  bomber_x = 640-64;
+-  old_bomber_x = 640-64;
++  bomber_x = 800-64;
++  old_bomber_x = 800-64;
+   bomber_go = 0;
+   bomber_happy = 1;
+   bombs_left = 0;
+@@ -1445,7 +1445,7 @@
+ #endif
+   
+   drawscore(score[player], player);
+-  my_updaterect(screen, 0, 0, 640, 480);
++  my_updaterect(screen, 0, 0, 800, 480);
+   
+   
+   /* Main game loop! */
+@@ -1568,14 +1568,14 @@
+ 	      x[player] = event.motion.x - (16 * width[player]);
+ 	      if (x[player] < 32)
+ 		x[player] = 32;
+-	      else if (x[player] > 608 - (width[player] * 32))
+-		x[player] = 608 - (width[player] * 32);
++	      else if (x[player] > 768 - (width[player] * 32))
++		x[player] = 768 - (width[player] * 32);
+ #else
+ 	      x[player] = event.motion.y * 2 - (16 * width[player]);
+ 	      if (x[player] < 32)
+ 		x[player] = 32;
+-	      else if (x[player] > 608 - (width[player] * 32))
+-		x[player] = 608 - (width[player] * 32);
++	      else if (x[player] > 768 - (width[player] * 32))
++		x[player] = 768 - (width[player] * 32);
+ #endif
+ 	    }
+ 	  else if (event.type == SDL_MOUSEBUTTONDOWN)
+@@ -1625,12 +1625,12 @@
+ 		  /* Erase the "Press Fire" message: */
+ 		  
+ #ifndef EMBEDDED
+-		  dest.x = (640 - (images[IMG_PRESS_FIRE] -> w)) / 2;
++		  dest.x = (800 - (images[IMG_PRESS_FIRE] -> w)) / 2;
+ 		  dest.y = 480 - (images[IMG_PRESS_FIRE] -> h);
+ 		  dest.w = images[IMG_PRESS_FIRE] -> w;
+ 		  dest.h = images[IMG_PRESS_FIRE] -> h;
+ #else
+-		  dest.x = (640 - (images[IMG_PRESS_FIRE] -> h * 2)) / 2;
++		  dest.x = (800 - (images[IMG_PRESS_FIRE] -> h * 2)) / 2;
+ 		  dest.y = 480 - (images[IMG_PRESS_FIRE] -> w * 2);
+ 		  dest.w = images[IMG_PRESS_FIRE] -> h * 2;
+ 		  dest.h = images[IMG_PRESS_FIRE] -> w * 2;
+@@ -1654,8 +1654,8 @@
+       else if (right_down == 1 && left_down == 0)
+ 	{
+ 	  x[player] = x[player] + 24;
+-	  if (x[player] > 608 - (width[player] * 32))
+-	    x[player] = 608 - (width[player] * 32);
++	  if (x[player] > 768 - (width[player] * 32))
++	    x[player] = 768 - (width[player] * 32);
+ 	}
+       
+       
+@@ -1674,9 +1674,9 @@
+ 		  bomber_x = 32;
+ 		  bomber_xm_time = 0;
+ 		}
+-	      else if (bomber_x > 576)
++	      else if (bomber_x > 736)
+ 		{
+-		  bomber_x = 576;
++		  bomber_x = 736;
+ 		  bomber_xm_time = 0;
+ 		}
+ 	      
+@@ -1709,8 +1709,8 @@
+ 	  else if (bomber_right_down == 1)
+ 	    bomber_x = bomber_x + 16;
+ 	  
+-	  if (bomber_x > 576)
+-	    bomber_x = 576;
++	  if (bomber_x > 736)
++	    bomber_x = 736;
+ 	}
+ #endif
+       
+@@ -2098,12 +2098,12 @@
+ 	      bomber_happy = 1;
+ 
+ #ifndef EMBEDDED	      
+-	      dest.x = (640 - (images[IMG_GAME_OVER] -> w)) / 2;
++	      dest.x = (800 - (images[IMG_GAME_OVER] -> w)) / 2;
+ 	      dest.y = (480 - (images[IMG_GAME_OVER] -> h)) / 2;
+ 	      dest.w = images[IMG_GAME_OVER] -> w;
+ 	      dest.h = images[IMG_GAME_OVER] -> h;
+ #else
+-	      dest.x = (640 - (images[IMG_GAME_OVER] -> h * 2)) / 2;
++	      dest.x = (800 - (images[IMG_GAME_OVER] -> h * 2)) / 2;
+ 	      dest.y = (480 - (images[IMG_GAME_OVER] -> w * 2)) / 2;
+ 	      dest.w = images[IMG_GAME_OVER] -> h * 2;
+ 	      dest.h = images[IMG_GAME_OVER] -> w * 2;
+@@ -2132,12 +2132,12 @@
+ 	  if ((frame % 30) == 0)
+ 	    {
+ #ifndef EMBEDDED
+-	      dest.x = (640 - (images[IMG_PRESS_ESCAPE] -> w)) / 2;
++	      dest.x = (800 - (images[IMG_PRESS_ESCAPE] -> w)) / 2;
+ 	      dest.y = 480 - (images[IMG_PRESS_ESCAPE] -> h);
+ 	      dest.w = images[IMG_PRESS_ESCAPE] -> w;
+ 	      dest.h = images[IMG_PRESS_ESCAPE] -> h;
+ #else
+-	      dest.x = (640 - (images[IMG_PRESS_ESCAPE] -> h * 2)) / 2;
++	      dest.x = (800 - (images[IMG_PRESS_ESCAPE] -> h * 2)) / 2;
+ 	      dest.y = 480 - (images[IMG_PRESS_ESCAPE] -> w * 2);
+ 	      dest.w = images[IMG_PRESS_ESCAPE] -> h * 2;
+ 	      dest.h = images[IMG_PRESS_ESCAPE] -> w * 2;
+@@ -2149,12 +2149,12 @@
+ 	  else if ((frame % 15) == 0)
+ 	    {
+ #ifndef EMBEDDED
+-	      dest.x = (640 - (images[IMG_PRESS_ESCAPE] -> w)) / 2;
++	      dest.x = (800 - (images[IMG_PRESS_ESCAPE] -> w)) / 2;
+ 	      dest.y = 480 - (images[IMG_PRESS_ESCAPE] -> h);
+ 	      dest.w = images[IMG_PRESS_ESCAPE] -> w;
+ 	      dest.h = images[IMG_PRESS_ESCAPE] -> h;
+ #else
+-	      dest.x = (640 - (images[IMG_PRESS_ESCAPE] -> h * 2)) / 2;
++	      dest.x = (800 - (images[IMG_PRESS_ESCAPE] -> h * 2)) / 2;
+ 	      dest.y = 480 - (images[IMG_PRESS_ESCAPE] -> w * 2);
+ 	      dest.w = images[IMG_PRESS_ESCAPE] -> h * 2;
+ 	      dest.h = images[IMG_PRESS_ESCAPE] -> w * 2;
+@@ -2187,12 +2187,12 @@
+ 	  if ((frame % 30) == 0)
+ 	    {
+ #ifndef EMBEDDED
+-	      dest.x = (640 - (images[IMG_PRESS_FIRE] -> w)) / 2;
++	      dest.x = (800 - (images[IMG_PRESS_FIRE] -> w)) / 2;
+ 	      dest.y = 480 - (images[IMG_PRESS_FIRE] -> h);
+ 	      dest.w = images[IMG_PRESS_FIRE] -> w;
+ 	      dest.h = images[IMG_PRESS_FIRE] -> h;
+ #else
+-	      dest.x = (640 - (images[IMG_PRESS_FIRE] -> h * 2)) / 2;
++	      dest.x = (800 - (images[IMG_PRESS_FIRE] -> h * 2)) / 2;
+ 	      dest.y = 480 - (images[IMG_PRESS_FIRE] -> w * 2);
+ 	      dest.w = images[IMG_PRESS_FIRE] -> h * 2;
+ 	      dest.h = images[IMG_PRESS_FIRE] -> w * 2;
+@@ -2204,12 +2204,12 @@
+ 	  else if ((frame % 15) == 0)
+ 	    {
+ #ifndef EMBEDDED
+-	      dest.x = (640 - (images[IMG_PRESS_FIRE] -> w)) / 2;
++	      dest.x = (800 - (images[IMG_PRESS_FIRE] -> w)) / 2;
+ 	      dest.y = 480 - (images[IMG_PRESS_FIRE] -> h);
+ 	      dest.w = images[IMG_PRESS_FIRE] -> w;
+ 	      dest.h = images[IMG_PRESS_FIRE] -> h;
+ #else
+-	      dest.x = (640 - (images[IMG_PRESS_FIRE] -> h * 2)) / 2;
++	      dest.x = (800 - (images[IMG_PRESS_FIRE] -> h * 2)) / 2;
+ 	      dest.y = 480 - (images[IMG_PRESS_FIRE] -> w * 2);
+ 	      dest.w = images[IMG_PRESS_FIRE] -> h * 2;
+ 	      dest.h = images[IMG_PRESS_FIRE] -> w * 2;
+@@ -2411,26 +2411,34 @@
+ #ifndef EMBEDDED
+   dest.x = 0;
+   dest.y = 0;
+-  dest.w = 640;
++  dest.w = 800;
++  dest.h = 480;
++
++  my_fillrect(screen, &dest,
++	      SDL_MapRGB(screen->format, 0x00, 0x00, 0x00));
++
++  dest.x = (800 - images[IMG_TITLE_TITLE] -> w) / 2 ;
++  dest.y = 0;
++  dest.w = images[IMG_TITLE_TITLE] -> w;
+   dest.h = images[IMG_TITLE_TITLE] -> h;
+   
+   my_blit(images[IMG_TITLE_TITLE], NULL, screen, &dest);
+   
+   dest.x = 0;
+   dest.y = images[IMG_TITLE_TITLE] -> h;
+-  dest.w = 640;
++  dest.w = 800;
+   dest.h = (480 - (images[IMG_TITLE_TITLE] -> h));
+ #else  
+   dest.x = 0;
+   dest.y = 0;
+-  dest.w = 640;
++  dest.w = 800;
+   dest.h = images[IMG_TITLE_TITLE] -> w * 2;
+   
+   my_blit(images[IMG_TITLE_TITLE], NULL, screen, &dest);
+   
+   dest.x = 0;
+   dest.y = images[IMG_TITLE_TITLE] -> w * 2;
+-  dest.w = 640;
++  dest.w = 800;
+   dest.h = (480 - (images[IMG_TITLE_TITLE] -> w * 2));
+ #endif
+   
+@@ -2445,12 +2453,12 @@
+   for (i = 0; i < NUM_TITLE_OPTIONS; i++)
+     {
+ #ifndef EMBEDDED
+-      dest.x = (640 - (images[title_option_images[i]] -> w)) / 2;
++      dest.x = (800 - (images[title_option_images[i]] -> w)) / 2;
+       dest.y = y;
+       dest.w = images[title_option_images[i]] -> w;
+       dest.h = images[title_option_images[i]] -> h;
+ #else
+-      dest.x = (640 - (images[title_option_images[i]] -> h * 2)) / 2;
++      dest.x = (800 - (images[title_option_images[i]] -> h * 2)) / 2;
+       dest.y = y;
+       dest.w = images[title_option_images[i]] -> h * 2;
+       dest.h = images[title_option_images[i]] -> w * 2;
+@@ -2471,7 +2479,7 @@
+     }
+ 
+ 
+-  my_updaterect(screen, 0, 0, 640, 480);
++  my_updaterect(screen, 0, 0, 800, 480);
+   
+   
+   /* Title screen loop: */
+@@ -2566,13 +2574,13 @@
+ 	      /* Unhighlight the old option: */
+ 	      
+ #ifndef EMBEDDED
+-	      dest.x = (640 -
++	      dest.x = (800 -
+ 			(images[title_option_images[old_option]] -> w)) / 2;
+ 	      dest.y = title_option_y[old_option];
+ 	      dest.w = images[title_option_images[old_option]] -> w;
+ 	      dest.h = images[title_option_images[old_option]] -> h;
+ #else
+-	      dest.x = ((640 -
++	      dest.x = ((800 -
+ 			 (images[title_option_images[old_option]] -> h) * 2)
+ 			/ 2);
+ 	      dest.y = title_option_y[old_option];
+@@ -2588,13 +2596,13 @@
+ 	  /* Highlight the new option: */
+ 	  
+ #ifndef EMBEDDED
+-	  dest.x = (640 -
++	  dest.x = (800 -
+ 		    (images[title_option_images[option]] -> w)) / 2;
+ 	  dest.y = title_option_y[option];
+ 	  dest.w = images[title_option_images[option]] -> w;
+ 	  dest.h = images[title_option_images[option]] -> h;
+ #else
+-	  dest.x = ((640 -
++	  dest.x = ((800 -
+ 		     (images[title_option_images[option]] -> h) * 2)
+ 		    / 2);
+ 	  dest.y = title_option_y[option];
+@@ -2716,12 +2724,12 @@
+   
+   if (use_fullscreen == 1)
+     {
+-      screen = SDL_SetVideoMode(640, 480, 16, SDL_FULLSCREEN);
++      screen = SDL_SetVideoMode(800, 480, 16, SDL_FULLSCREEN);
+       if (screen == NULL)
+ 	{
+ 	  fprintf(stderr,
+ 		  "\nWarning: I could not set up fullscreen video for "
+-		  "640x480 mode.\n"
++		  "800x480 mode.\n"
+ 		  "The Simple DirectMedia error that occured was:\n"
+ 		  "%s\n\n", SDL_GetError());
+ 	  use_fullscreen = 0;
+@@ -2731,12 +2739,12 @@
+   if (use_fullscreen == 0)
+     {
+ #ifndef EMBEDDED
+-      screen = SDL_SetVideoMode(640, 480, 16, 0);
++      screen = SDL_SetVideoMode(800, 480, 16, 0);
+       
+       if (screen == NULL)
+ 	{
+ 	  fprintf(stderr,
+-		  "\nError: I could not set up video for 640x480 mode.\n"
++		  "\nError: I could not set up video for 800x480 mode.\n"
+ 		  "The Simple DirectMedia error that occured was:\n"
+ 		  "%s\n\n", SDL_GetError());
+ 	  exit(1);
+@@ -2834,12 +2842,12 @@
+       if (i == IMG_LOADING)
+ 	{
+ #ifndef EMBEDDED
+-	  dest.x = (640 - (images[IMG_LOADING] -> w)) / 2;
++	  dest.x = (800 - (images[IMG_LOADING] -> w)) / 2;
+ 	  dest.y = (480 - (images[IMG_LOADING] -> h)) / 2;
+ 	  dest.w = images[IMG_LOADING] -> w;
+ 	  dest.h = images[IMG_LOADING] -> h;
+ #else
+-	  dest.x = (640 - (images[IMG_LOADING] -> h * 2)) / 2;
++	  dest.x = (800 - (images[IMG_LOADING] -> h * 2)) / 2;
+ 	  dest.y = (480 - (images[IMG_LOADING] -> w * 2)) / 2;
+ 	  dest.w = images[IMG_LOADING] -> h * 2;
+ 	  dest.h = images[IMG_LOADING] -> w * 2;
+@@ -2851,14 +2859,14 @@
+       else if (i >= IMG_BAR)
+ 	{
+ #ifndef EMBEDDED
+-	  dest.x = (((640 - (images[IMG_BAR] -> w)) * i) /
++	  dest.x = (((800 - (images[IMG_BAR] -> w)) * i) /
+ 		    (NUM_IMAGES + NUM_SOUNDS));
+ 	  dest.y = (((480 - (images[IMG_LOADING] -> h)) / 2) +
+ 		    (images[IMG_LOADING] -> h));
+ 	  dest.w = images[IMG_BAR] -> w;
+ 	  dest.h = images[IMG_BAR] -> h;
+ #else
+-	  dest.x = (((640 - (images[IMG_BAR] -> h * 2)) * i) /
++	  dest.x = (((800 - (images[IMG_BAR] -> h * 2)) * i) /
+ 		    (NUM_IMAGES + NUM_SOUNDS));
+ 	  dest.y = (((480 - (images[IMG_LOADING] -> w * 2)) / 2) +
+ 		    (images[IMG_LOADING] -> w * 2));
+@@ -2874,11 +2882,11 @@
+   
+   /* Create zen background: */
+   
+-  image = SDL_CreateRGBSurface(SDL_SWSURFACE, 640, 480, 16, 0, 0, 0, 0);
++  image = SDL_CreateRGBSurface(SDL_SWSURFACE, 800, 480, 16, 0, 0, 0, 0);
+   
+   dest.x = 0;
+   dest.y = 0;
+-  dest.w = 640;
++  dest.w = 800;
+   dest.h = 480;
+   
+   my_fillrect(image, &dest,
+@@ -2900,7 +2908,7 @@
+   my_fillrect(image, &dest,
+ 	       SDL_MapRGB(image->format, 74, 115, 24));
+   
+-  my_updaterect(image, 0, 0, 640, 480);
++  my_updaterect(image, 0, 0, 800, 480);
+   
+   zen_background = SDL_DisplayFormat(image);
+ 
+@@ -2939,8 +2947,8 @@
+ #endif
+ 
+   
+-  option_box.x = (640 - option_box.w) / 2;
+-  option_box.y = (640 - option_box.h) / 2;
++  option_box.x = (800 - option_box.w) / 2;
++  option_box.y = (480 - option_box.h) / 1;
+   
+   
+ #ifndef NOSOUND
+@@ -2965,14 +2973,14 @@
+ 	  /* Draw percentage bar: */
+ 	  
+ #ifndef EMBEDDED
+-	  dest.x = (((640 - (images[IMG_BAR] -> w)) * (i + NUM_IMAGES)) /
++	  dest.x = (((800 - (images[IMG_BAR] -> w)) * (i + NUM_IMAGES)) /
+ 		    (NUM_IMAGES + NUM_SOUNDS));
+ 	  dest.y = (((480 - (images[IMG_LOADING] -> h)) / 2) +
+ 		    (images[IMG_LOADING] -> h));
+ 	  dest.w = images[IMG_BAR] -> w;
+ 	  dest.h = images[IMG_BAR] -> h;
+ #else
+-	  dest.x = (((640 - (images[IMG_BAR] -> h * 2)) * (i + NUM_IMAGES)) /
++	  dest.x = (((800 - (images[IMG_BAR] -> h * 2)) * (i + NUM_IMAGES)) /
+ 		    (NUM_IMAGES + NUM_SOUNDS));
+ 	  dest.y = (((480 - (images[IMG_LOADING] -> w * 2)) / 2) +
+ 		    (images[IMG_LOADING] -> w * 2));
+@@ -3200,7 +3208,7 @@
+   
+   /* Erase where the score was: */
+   
+-  dest.x = 416;
++  dest.x = 576;
+   dest.y = 2;
+   dest.w = 192;
+   dest.h = 32;
+@@ -3215,7 +3223,7 @@
+   
+   for (i = 0; i < 6; i++)
+     {
+-      dest.x = 416 + (i * 32);
++      dest.x = 576 + (i * 32);
+       dest.y = 2;
+       dest.w = 32;
+       dest.h = 32;
+@@ -3231,12 +3239,12 @@
+   /* Draw (or erase) high score message: */
+ 
+ #ifndef EMBEDDED  
+-  dest.x = 416 - (images[IMG_HIGHSCORE] -> w);
++  dest.x = 576 - (images[IMG_HIGHSCORE] -> w);
+   dest.y = 2;
+   dest.w = (images[IMG_HIGHSCORE] -> w);
+   dest.h = (images[IMG_HIGHSCORE] -> h);
+ #else
+-  dest.x = 416 - (images[IMG_HIGHSCORE] -> h * 2);
++  dest.x = 576 - (images[IMG_HIGHSCORE] -> h * 2);
+   dest.y = 2;
+   dest.w = (images[IMG_HIGHSCORE] -> h * 2);
+   dest.h = (images[IMG_HIGHSCORE] -> w * 2);
+@@ -3272,12 +3280,12 @@
+   /* Draw "PAUSED" message: */
+ 
+ #ifndef EMBEDDED  
+-  dest.x = (640 - (images[IMG_PAUSED] -> w)) / 2;
++  dest.x = (800 - (images[IMG_PAUSED] -> w)) / 2;
+   dest.y = (480 - (images[IMG_PAUSED] -> h)) / 2;
+   dest.w = images[IMG_PAUSED] -> w;
+   dest.h = images[IMG_PAUSED] -> h;
+ #else
+-  dest.x = (640 - (images[IMG_PAUSED] -> h * 2)) / 2;
++  dest.x = (800 - (images[IMG_PAUSED] -> h * 2)) / 2;
+   dest.y = (480 - (images[IMG_PAUSED] -> w * 2)) / 2;
+   dest.w = images[IMG_PAUSED] -> h * 2;
+   dest.h = images[IMG_PAUSED] -> w * 2;
+@@ -3337,12 +3345,12 @@
+   /* Erase "PAUSED" message: */
+ 
+ #ifndef EMBEDDED  
+-  dest.x = (640 - (images[IMG_PAUSED] -> w)) / 2;
++  dest.x = (800 - (images[IMG_PAUSED] -> w)) / 2;
+   dest.y = (480 - (images[IMG_PAUSED] -> h)) / 2;
+   dest.w = images[IMG_PAUSED] -> w;
+   dest.h = images[IMG_PAUSED] -> h;
+ #else
+-  dest.x = (640 - (images[IMG_PAUSED] -> h * 2)) / 2;
++  dest.x = (800 - (images[IMG_PAUSED] -> h * 2)) / 2;
+   dest.y = (480 - (images[IMG_PAUSED] -> w * 2)) / 2;
+   dest.w = images[IMG_PAUSED] -> h * 2;
+   dest.h = images[IMG_PAUSED] -> w * 2;
+@@ -3373,7 +3381,7 @@
+   
+   dest.x = 0;
+   dest.y = 0;
+-  dest.w = 640;
++  dest.w = 800;
+   dest.h = 480;
+   
+   my_fillrect(screen, &dest,
+@@ -3383,12 +3391,12 @@
+   /* Draw "OPTIONS" title: */
+ 
+ #ifndef EMBEDDED  
+-  dest.x = (640 - (images[IMG_OPTIONS_OPTIONS] -> w)) / 2;
++  dest.x = (800 - (images[IMG_OPTIONS_OPTIONS] -> w)) / 2;
+   dest.y = 0;
+   dest.w = images[IMG_OPTIONS_OPTIONS] -> w;
+   dest.h = images[IMG_OPTIONS_OPTIONS] -> h;
+ #else
+-  dest.x = (640 - (images[IMG_OPTIONS_OPTIONS] -> h * 2)) / 2;
++  dest.x = (800 - (images[IMG_OPTIONS_OPTIONS] -> h * 2)) / 2;
+   dest.y = 0;
+   dest.w = images[IMG_OPTIONS_OPTIONS] -> h * 2;
+   dest.h = images[IMG_OPTIONS_OPTIONS] -> w * 2;
+@@ -3485,12 +3493,12 @@
+   /* Draw OK button: */
+ 
+ #ifndef EMBEDDED  
+-  dest.x = (640 - (images[IMG_OPTIONS_OK] -> w)) / 2;
++  dest.x = (800 - (images[IMG_OPTIONS_OK] -> w)) / 2;
+   dest.y = 480 - (images[IMG_OPTIONS_OK] -> h);
+   dest.w = images[IMG_OPTIONS_OK] -> w;
+   dest.h = images[IMG_OPTIONS_OK] -> h;
+ #else
+-  dest.x = (640 - (images[IMG_OPTIONS_OK] -> h * 2)) / 2;
++  dest.x = (800 - (images[IMG_OPTIONS_OK] -> h * 2)) / 2;
+   dest.y = 480 - (images[IMG_OPTIONS_OK] -> w * 2);
+   dest.w = images[IMG_OPTIONS_OK] -> h * 2;
+   dest.h = images[IMG_OPTIONS_OK] -> w * 2;
+@@ -3501,7 +3509,7 @@
+ 
+   /* Update screen: */
+   
+-  my_updaterect(screen, 0, 0, 640, 480);
++  my_updaterect(screen, 0, 0, 800, 480);
+   
+   
+   /* Pause loop: */
+@@ -3663,11 +3671,11 @@
+ #ifndef EMBEDDED
+ 	      if (by >= 84 &&
+ 		  by <= 84 + (images[IMG_OPTIONS_NORMAL] -> h) &&
+-		  bx >= 640 - (images[IMG_OPTIONS_NORMAL] -> w))
++		  bx >= 800 - (images[IMG_OPTIONS_NORMAL] -> w))
+ #else
+ 	      if (by >= 84 &&
+ 		  by <= 84 + (images[IMG_OPTIONS_NORMAL] -> w * 2) &&
+-		  bx >= 640 - (images[IMG_OPTIONS_NORMAL] -> h * 2))
++		  bx >= 800 - (images[IMG_OPTIONS_NORMAL] -> h * 2))
+ #endif
+ 		{
+ 		  /* Detail: */
+@@ -3703,9 +3711,9 @@
+ 			old_which_option = -1;
+ 		    }
+ #ifndef EMBEDDED
+-		  else if (bx >= (640 - (images[IMG_OPTIONS_NORMAL] -> w)))
++		  else if (bx >= (800 - (images[IMG_OPTIONS_NORMAL] -> w)))
+ #else
+-		  else if (bx >= (640 - (images[IMG_OPTIONS_NORMAL] -> h * 2)))
++		  else if (bx >= (800 - (images[IMG_OPTIONS_NORMAL] -> h * 2)))
+ #endif
+ 		    {
+ 		      /* Player two: */
+@@ -3719,13 +3727,13 @@
+ 		}
+ #ifndef EMBEDDED
+ 	      else if (by >= 480 - (images[IMG_OPTIONS_OK] -> h) &&
+-		       bx >= (640 - (images[IMG_OPTIONS_OK] -> w)) / 2 &&
+-		       bx <= ((640 - (images[IMG_OPTIONS_OK] -> w))
++		       bx >= (800 - (images[IMG_OPTIONS_OK] -> w)) / 2 &&
++		       bx <= ((800 - (images[IMG_OPTIONS_OK] -> w))
+ 					  / 2) + (images[IMG_OPTIONS_OK] -> w))
+ #else
+ 	      else if (by >= 480 - (images[IMG_OPTIONS_OK] -> w * 2) &&
+-		       bx >= (640 - (images[IMG_OPTIONS_OK] -> h * 2)) / 2 &&
+-		       bx <= ((640 - (images[IMG_OPTIONS_OK] -> h * 2))
++		       bx >= (800 - (images[IMG_OPTIONS_OK] -> h * 2)) / 2 &&
++		       bx <= ((800 - (images[IMG_OPTIONS_OK] -> h * 2))
+ 			  / 2) + (images[IMG_OPTIONS_OK] -> h * 2))
+ #endif
+ 		{
+@@ -3764,14 +3772,14 @@
+ 			  if (old_which_option == which_option)
+ 			    old_which_option = -1;
+ 			}
+-		      else if (event.button.x >= (640 -
++		      else if (event.button.x >= (800 -
+ 						  ((images[IMG_OPTIONS_0PERCENT]
+ 						    -> w) * 9)))
+ 			{
+ 			  /* Music: */
+ 			  
+ 			  music_volume = ((event.button.x - 
+-					   (640 - ((images[IMG_OPTIONS_0PERCENT]
++					   (800 - ((images[IMG_OPTIONS_0PERCENT]
+ 						    -> w) * 9))) /
+ 					  (images[IMG_OPTIONS_0PERCENT] -> w));
+ 			  
+@@ -3826,12 +3834,12 @@
+ 	  else if (old_which_option == OPTIONS_OPTION_OK)
+ 	    {
+ #ifndef EMBEDDED
+-	      dest.x = (640 - (images[IMG_OPTIONS_OK] -> w)) / 2;
++	      dest.x = (800 - (images[IMG_OPTIONS_OK] -> w)) / 2;
+ 	      dest.y = 480 - (images[IMG_OPTIONS_OK] -> h);
+ 	      dest.w = images[IMG_OPTIONS_OK] -> w;
+ 	      dest.h = images[IMG_OPTIONS_OK] -> h;
+ #else
+-	      dest.x = (640 - (images[IMG_OPTIONS_OK] -> h * 2)) / 2;
++	      dest.x = (800 - (images[IMG_OPTIONS_OK] -> h * 2)) / 2;
+ 	      dest.y = 480 - (images[IMG_OPTIONS_OK] -> w * 2);
+ 	      dest.w = images[IMG_OPTIONS_OK] -> h * 2;
+ 	      dest.h = images[IMG_OPTIONS_OK] -> w * 2;
+@@ -3839,7 +3847,7 @@
+ 	      
+ 	      my_blit(images[IMG_OPTIONS_OK_OFF], NULL, screen, &dest);
+ 	      my_updaterect(screen, dest.x, dest.y, dest.w, dest.h);
+-	      my_updaterect(screen, 0, 0, 640, 480);
++	      my_updaterect(screen, 0, 0, 800, 480);
+ 	    }
+ 	  
+ 	  
+@@ -3872,12 +3880,12 @@
+ 	  else if (which_option == OPTIONS_OPTION_OK)
+ 	    {
+ #ifndef EMBEDDED
+-	      dest.x = (640 - (images[IMG_OPTIONS_OK] -> w)) / 2;
++	      dest.x = (800 - (images[IMG_OPTIONS_OK] -> w)) / 2;
+ 	      dest.y = 480 - (images[IMG_OPTIONS_OK] -> h);
+ 	      dest.w = images[IMG_OPTIONS_OK] -> w;
+ 	      dest.h = images[IMG_OPTIONS_OK] -> h;
+ #else
+-	      dest.x = (640 - (images[IMG_OPTIONS_OK] -> h * 2)) / 2;
++	      dest.x = (800 - (images[IMG_OPTIONS_OK] -> h * 2)) / 2;
+ 	      dest.y = 480 - (images[IMG_OPTIONS_OK] -> w * 2);
+ 	      dest.w = images[IMG_OPTIONS_OK] -> h * 2;
+ 	      dest.h = images[IMG_OPTIONS_OK] -> w * 2;
+@@ -3885,7 +3893,7 @@
+ 
+ 	      my_blit(images[IMG_OPTIONS_OK], NULL, screen, &dest);
+ 	      my_updaterect(screen, dest.x, dest.y, dest.w, dest.h);
+-	      my_updaterect(screen, 0, 0, 640, 480);
++	      my_updaterect(screen, 0, 0, 800, 480);
+ 	    }
+ 	  
+ 	  
+@@ -4048,7 +4056,7 @@
+ 
+   dest.x = 0;
+   dest.y = 0;
+-  dest.w = 640;
++  dest.w = 800;
+   dest.h = 480;
+   
+   
+@@ -4056,7 +4064,7 @@
+   
+   my_fillrect(screen, &dest,
+ 	       SDL_MapRGB(screen->format, 0xFF, 0xFF, 0xFF));
+-  my_updaterect(screen, 0, 0, 640, 480);
++  my_updaterect(screen, 0, 0, 800, 480);
+   
+   
+   /* (wait a brief moment) */
+@@ -4108,7 +4116,7 @@
+   
+   /* ((update it all)) */
+   
+-  my_updaterect(screen, 0, 0, 640, 480);
++  my_updaterect(screen, 0, 0, 800, 480);
+   
+   
+ #ifndef NOSOUND
+@@ -4260,9 +4268,9 @@
+     dest.x = 220;
+   else
+ #ifndef EMBEDDED
+-    dest.x = 640 - (images[img] -> w);
++    dest.x = 800 - (images[img] -> w);
+ #else
+-    dest.x = 640 - (images[img] -> h * 2);
++    dest.x = 800 - (images[img] -> h * 2);
+ #endif
+   
+   dest.y = y;
+@@ -4295,7 +4303,7 @@
+   if (horiz == 0)
+     x = 220;
+   else
+-    x = 640 - ((images[IMG_OPTIONS_0PERCENT] -> w) * 9);
++    x = 800 - ((images[IMG_OPTIONS_0PERCENT] -> w) * 9);
+ 
+   
+   /* Erase meter: */
+@@ -4350,9 +4358,9 @@
+ 	  /* Determine where the "light" is: */
+ 	  
+ 	  if (i == 0 || i == 1 || i == 3 || i == 4 || i == 6)
+-	    dest.x = 320 + (-scale * 5);
++	    dest.x = 400 + (-scale * 5);
+ 	  else
+-	    dest.x = 320 + (scale * 5);
++	    dest.x = 400 + (scale * 5);
+ 	  
+ 	  if (i == 0 || i == 1 || i == 2)
+ 	    dest.y = 240 + (-scale * 10);
+@@ -4392,7 +4400,7 @@
+ {
+   SDL_Rect dest;
+   
+-  dest.x = 320 + (-scale * 5);
++  dest.x = 400 + (-scale * 5);
+   dest.y = 240 + (-scale * 10);
+   dest.w = scale * 15;
+   dest.h = scale * 22;
+@@ -4418,7 +4426,7 @@
+   /* Draw game background: */
+   
+   my_blit(images[IMG_BACKGROUND], NULL, screen, NULL);
+-  my_updaterect(screen, 0, 0, 640, 480);
++  my_updaterect(screen, 0, 0, 800, 480);
+   
+   
+   /* Clear all spray drips: */
+@@ -4591,7 +4599,7 @@
+   
+   /* Place our virtual cursor (we want each line centered): */
+   
+-  x = (640 - (strlen(str) * (scale * 6))) / 2;
++  x = (800 - (strlen(str) * (scale * 6))) / 2;
+   
+   
+   /* Draw each letter: */
+@@ -4935,7 +4943,7 @@
+   
+   dest.x = 0;
+   dest.y = 0;
+-  dest.w = 640;
++  dest.w = 800;
+   dest.h = 480;
+   
+   my_fillrect(screen, &dest,
+@@ -4944,7 +4952,7 @@
+   
+   dest.x = 0;
+   dest.y = 0;
+-  dest.w = 640;
++  dest.w = 800;
+ #ifndef EMBEDDED
+   dest.h = images[IMG_HIGHSCORE_HIGHSCORE] -> h;
+ #else
+@@ -4953,7 +4961,7 @@
+   
+   my_blit(images[IMG_HIGHSCORE_HIGHSCORE], NULL, screen, &dest);
+   
+-  my_updaterect(screen, 0, 0, 640, 480);
++  my_updaterect(screen, 0, 0, 800, 480);
+   
+   strcpy(highscorer, "");
+   l = 0;
+@@ -5020,7 +5028,7 @@
+ 	  
+ 	  dest.x = 0;
+ 	  dest.y = 200;
+-	  dest.w = 640;
++	  dest.w = 800;
+ #ifndef EMBEDDED
+ 	  dest.h = images[IMG_HIGHSCORE_LETTERS] -> h;
+ #else
+@@ -5049,7 +5057,7 @@
+ 		  src.w = (images[IMG_HIGHSCORE_LETTERS] -> w) / 36;
+ 		  src.h = images[IMG_HIGHSCORE_LETTERS] -> h;
+ 
+-		  dest.x = ((640 - (strlen(highscorer) *
++		  dest.x = ((800 - (strlen(highscorer) *
+ 				    ((images[IMG_HIGHSCORE_LETTERS] -> w) /
+ 				     36)))
+ 			    / 2) + (i * (images[IMG_HIGHSCORE_LETTERS] -> w) /
+@@ -5093,7 +5101,7 @@
+ 	  
+ 	  dest.x = 0;
+ 	  dest.y = 200;
+-	  dest.w = 640;
++	  dest.w = 800;
+ #ifndef EMBEDDED
+ 	  dest.h = images[IMG_HIGHSCORE_LETTERS] -> h;
+ #else
+@@ -5101,7 +5109,7 @@
+ #endif
+ 	 
+ 	  my_updaterect(screen, 0, 200,
+-			 640, dest.h);
++			 800, dest.h);
+ 	  
+ 	  draw_text = 0;
+ 	}

@@ -1,0 +1,11 @@
+[Desktop Entry]
+Encoding=UTF-8
+Version=1.0
+Type=Application
+Name=Mad Bomber
+Exec=/usr/games/madbomber
+Icon=madbomber-icon
+X-Osso-Type=application/x-executable
+X-Osso-Service=org.maemo.madbomber
+Terminal=false
+

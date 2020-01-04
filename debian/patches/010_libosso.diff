@@ -1,0 +1,107 @@
+Index: madbomber-0.2.5/madbomber.c
+===================================================================
+--- madbomber-0.2.5.orig/madbomber.c	2009-10-31 00:22:26.000000000 +0000
++++ madbomber-0.2.5/madbomber.c	2009-10-31 00:28:50.000000000 +0000
+@@ -27,6 +27,7 @@
+ #include <SDL.h>
+ #include <SDL_image.h>
+ #include <math.h>
++#include <libosso.h>
+ 
+ /* #ifdef WIN32 */
+ /* #include <windows.h> */
+@@ -827,6 +828,8 @@
+ drop_type drops[MAX_DROPS];
+ spraydrip_type spraydrips[MAX_SPRAYDRIPS];
+ 
++osso_context_t *osso_context = NULL;
++
+ #ifndef NOSOUND
+ Mix_Chunk * sounds[NUM_SOUNDS];
+ Mix_Music * title_music;
+@@ -877,6 +880,7 @@
+ void my_updaterect(SDL_Surface * surf, int x, int y, int w, int h);
+ void my_fillrect(SDL_Surface * surf, SDL_Rect * dest, Uint32 color);
+ int accel_read(int *x);
++void display_event(osso_display_state_t state, gpointer data);
+ 
+ int accel_read(int *x) {
+ 	int ax,ay,az;
+@@ -892,6 +896,11 @@
+ 	return 0;
+ }
+ 
++
++void display_event(osso_display_state_t state, gpointer data) {
++	printf ("display_event\n");
++}
++
+ /* --- MAIN --- */
+ 
+ #ifdef WIN32
+@@ -1493,6 +1502,7 @@
+   can_continue = 1;
+ #endif
+   
++  osso_system_note_infoprint(osso_context, "Tilt the screen to control the buckets", NULL);
+   
+   do
+     {
+@@ -2888,6 +2898,17 @@
+     }
+   
+   seticon();
++
++  /* Initialize Libosso */
++  osso_return_t result;
++  osso_context = osso_initialize("org.maemo.madbomber", "1.0", TRUE, NULL);
++  if (osso_context == NULL) return OSSO_ERROR;
++
++  result = osso_hw_set_display_event_cb(osso_context, display_event, NULL);
++  if (result != OSSO_OK) {
++  	printf("Error setting D-BUS callback (%d)\n", result);
++  	return OSSO_ERROR;
++  }
+   
+   
+   /* Set window manager stuff: */
+@@ -3187,6 +3208,8 @@
+       SDL_FreeSurface(images[i]);
+     }
+   
++  if (osso_context != NULL)
++    osso_deinitialize(osso_context);
+   
+   /* Close sound: */
+   
+Index: madbomber-0.2.5/Makefile
+===================================================================
+--- madbomber-0.2.5.orig/Makefile	2003-03-17 04:29:41.000000000 +0000
++++ madbomber-0.2.5/Makefile	2009-10-31 00:22:26.000000000 +0000
+@@ -19,6 +19,8 @@
+ TARGET_DEF=LINUX
+ SDL_CFLAGS := $(shell sdl-config --cflags)
+ SDL_LDFLAGS := $(shell sdl-config --libs)
++OSSO_CFLAGS := $(shell pkg-config --cflags libosso)
++OSSO_LDFLAGS := $(shell pkg-config --libs libosso)
+ 
+ 
+ # Sound-related definitions:
+@@ -30,7 +32,7 @@
+ 
+ # Stuff we pass to the compiler:
+ 
+-CFLAGS=-Wall $(SDL_CFLAGS) \
++CFLAGS=-Wall $(SDL_CFLAGS) $(OSSO_CFLAGS) \
+ 	-DDATA_PREFIX=\"$(DATA_PREFIX)\" -D$(NOSOUNDFLAG) -D$(TARGET_DEF)
+ SDL_LIB=$(MIXER) $(IMAGE) $(SDL_LDFLAGS)
+ 
+@@ -78,7 +80,7 @@
+ # Main executable:
+ 
+ $(TARGET):	madbomber.o
+-	$(CC) $(CFLAGS) madbomber.o -o $(TARGET) $(SDL_LIB) -lm
++	$(CC) $(CFLAGS) madbomber.o -o $(TARGET) $(SDL_LIB) $(OSSO_LDFLAGS) -lm
+ 
+ 
+ # Main object:

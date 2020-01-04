@@ -1,0 +1,233 @@
+madbomber (0.2.5-3maemo14) fremantle; urgency=low
+
+  * battery saving when screen is blanked (use suspendprocess)
+
+ -- Mikko Vartiainen <mvartiainen@gmail.com>  Thu,  2 Sep 2010 12:52:33 +0100
+
+madbomber (0.2.5-3maemo13) fremantle; urgency=low
+
+  * 010_libosso.diff: added startup help message
+  * 005_accelerometer.diff: removed forgotten debug messages
+  * debian/rules: disabled sound because #5524 makes sound completely unsafe
+  * removed 100_maemosdl_hack.diff because it's not needed when sound is disabled
+
+ -- Mikko Vartiainen <mvartiainen@gmail.com>  Sat, 31 Oct 2009 01:12:16 +0000
+
+madbomber (0.2.5-3maemo12) fremantle; urgency=low
+
+  * removed 002_maemotasknavigator and 004_makefile patches
+  * 005_accelerometer.diff: use oversampling&averaging filter
+  * 010_libosso.diff: register with libosso, removed startup script
+  * 100_maemosdl_hack.diff: do not deinitialize sdl due to #5524
+
+ -- Mikko Vartiainen <mvartiainen@gmail.com>  Thu, 29 Oct 2009 21:17:56 +0000
+
+madbomber (0.2.5-3maemo11) fremantle; urgency=low
+
+  * 005_accelerometer.diff: perfected the controls
+
+ -- Mikko Vartiainen <mvartiainen@gmail.com>  Mon, 14 Sep 2009 03:53:01 +0300
+
+madbomber (0.2.5-3maemo10) fremantle; urgency=low
+
+  * 009_activeevent.diff: handle SDL_QUIT
+
+ -- Mikko Vartiainen <mvartiainen@gmail.com>  Sat, 12 Sep 2009 03:13:50 +0300
+
+madbomber (0.2.5-3maemo9) fremantle; urgency=low
+
+  * 009_activeevent.diff: pause everything when focus is lost
+
+ -- Mikko Vartiainen <mvartiainen@gmail.com>  Fri, 11 Sep 2009 01:49:01 +0300
+
+madbomber (0.2.5-3maemo8) fremantle; urgency=low
+
+  * 005_accelerometer.diff: make smoothing really do something
+  * 006_controls.diff: use SDLK_KP_ENTER everywhere, fixes #5114
+  * 008_sdlflip: use SDL_Flip(), this is actually faster with compositor running!
+  * debian/rules: use optify
+
+ -- Mikko Vartiainen <mvartiainen@gmail.com>  Thu, 10 Sep 2009 01:40:07 +0300
+
+madbomber (0.2.5-3maemo7) fremantle; urgency=low
+
+  * 007_exit.diff: exit button
+  * 005_accelerometer.diff: add smoothing
+
+ -- Mikko Vartiainen <mvartiainen@gmail.com>  Fri,  4 Sep 2009 01:27:10 +0300
+
+madbomber (0.2.5-3maemo6) fremantle; urgency=low
+
+  * 005_accelerometer.diff: fixed accelerometer reading
+
+ -- Mikko Vartiainen <mvartiainen@gmail.com>  Fri, 28 Aug 2009 16:52:18 +0300
+
+madbomber (0.2.5-3maemo5) fremantle; urgency=low
+
+  * 005_accelerometer.diff: accelerometer support
+
+ -- Mikko Vartiainen <mvartiainen@gmail.com>  Sat, 15 Aug 2009 02:33:19 +0300
+
+madbomber (0.2.5-3maemo4) fremantle; urgency=low
+
+  * debian/postinst: removed maemo-select-menu-location
+  * debian/rules: removed maemo-install-utils depency
+
+ -- Mikko Vartiainen <mvartiainen@gmail.com>  Tue, 16 Jun 2009 13:15:34 +0300
+
+madbomber (0.2.5-3maemo3) unstable; urgency=low
+
+  * 800x480 video mode
+
+ -- Mikko Vartiainen <mvartiainen@gmail.com>  Tue, 12 Sep 2008 22:22:14 +0300
+
+madbomber (0.2.5-3maemo2) unstable; urgency=low
+
+  * add depency between madbomber-data and madbomber
+
+ -- Mikko Vartiainen <mvartiainen@gmail.com>  Thu, 12 Sep 2008 14:26:51 +0300
+
+madbomber (0.2.5-3maemo1) unstable; urgency=low
+
+  * Debian to maemo release
+  * changes for hildon taskswitcher visibility
+
+ -- Mikko Vartiainen <mvartiainen@gmail.com>  Mon, 28 Jul 2008 03:35:55 +0300
+
+madbomber (0.2.5-3) unstable; urgency=low
+
+  * install a desktop file (closes: #478923)
+
+ -- Christian T. Steigies <cts@debian.org>  Sun, 15 Jun 2008 18:21:00 +0200
+
+madbomber (0.2.5-2) unstable; urgency=low
+
+  * updated Standards-Version to 3.7.3, use section Games/Action according
+    to the menu policy
+  * do not ignore make clean error
+  * use debian/compat and use compat version 5
+
+ -- Christian T. Steigies <cts@debian.org>  Fri, 21 Mar 2008 20:59:47 +0100
+
+madbomber (0.2.5-1) unstable; urgency=low
+
+  * new upstream version
+  * updated watch file
+  * use current debhelper
+  * updated Standards-Version to 3.7.0 (no changes)
+  * do not ship images for the embedded version of madbomber
+
+ -- Christian T. Steigies <cts@debian.org>  Wed,  3 May 2006 22:20:00 +0000
+
+madbomber (0.2.4-4) unstable; urgency=low
+
+  * copyright is with the author (closes: #336901)
+  * updated Standards-Version to 3.6.2 (no changes)
+
+ -- Christian T. Steigies <cts@debian.org>  Tue,  3 Jan 2006 22:55:29 +0100
+
+madbomber (0.2.4-3) unstable; urgency=low
+
+  * dh_compat=4
+  * added ftp link to watch file, but still use http
+  * install menu icon to /usr/share/pixmaps
+  * updated Standards-Version to 3.6.1.0 (no changes)
+
+ -- Christian T. Steigies <cts@debian.org>  Sun, 13 Mar 2005 16:11:58 +0100
+
+madbomber (0.2.4-2) unstable; urgency=low
+
+  * remove .xvpics directory in clean target
+  * patch from John Lightsey to disable the mouse cursor (closes: #203828)
+
+ -- Christian T. Steigies <cts@debian.org>  Fri,  1 Aug 2003 20:14:01 -0400
+
+madbomber (0.2.4-1) unstable; urgency=low
+
+  * New upstream release
+
+ -- Christian T. Steigies <cts@debian.org>  Mon,  4 Nov 2002 09:53:49 -0500
+
+madbomber (0.1.8-8) unstable; urgency=low
+
+  * update build-depends to latest (fixed) SDL packages
+  * recompile (closes: #130148)
+
+ -- Christian T. Steigies <cts@debian.org>  Sun, 20 Jan 2002 14:19:24 -0500
+
+madbomber (0.1.8-7) unstable; urgency=low
+
+  * madbomber-data: Replaces: madbomber (<< 0.1.8-6)
+
+ -- Christian T. Steigies <cts@debian.org>  Sun, 13 Jan 2002 18:44:02 -0500
+
+madbomber (0.1.8-6) unstable; urgency=low
+
+  * re-package, split out -data package
+  * ship CHANGES.txt only as changelog
+
+ -- Christian T. Steigies <cts@debian.org>  Sat,  5 Jan 2002 00:16:09 -0500
+
+madbomber (0.1.8-5) unstable; urgency=low
+
+  * include a prebuilt icon, since imagemagick is broken
+  * do NOT Build-Depend on imagemagick, since these packages can not even 
+    be installed on some architectures
+
+ -- Christian T. Steigies <cts@debian.org>  Wed,  2 Jan 2002 00:01:13 -0500
+
+madbomber (0.1.8-4) unstable; urgency=low
+
+  * Build-Depends on libsdl1.2-dev (>= 1.2.2-3.1), 
+    libsdl-image1.2-dev(>= 1.2.0-1.1), libsdl-mixer1.2-dev (>= 1.2.0-1.1)
+    due to SDL overhaul
+
+ -- Christian T. Steigies <cts@debian.org>  Wed, 10 Oct 2001 23:55:53 -0400
+
+madbomber (0.1.8-3) unstable; urgency=low
+
+  * remove (unneeded) dh_suidregister from debian/rules
+  * build with SDL1.2
+  * update standards version
+  * do not ship INSTALL.txt
+
+ -- Christian T. Steigies <cts@debian.org>  Mon, 16 Jul 2001 18:36:58 -0400
+
+madbomber (0.1.8-2) unstable; urgency=low
+
+  * rebuild with SDL1.0, sdl-image1.0 and sdl-mixer1.0
+
+ -- Christian T. Steigies <cts@debian.org>  Tue,  7 Nov 2000 21:26:01 +0100
+
+madbomber (0.1.8-1) unstable; urgency=low
+
+  * new upstream version
+
+ -- Christian T. Steigies <cts@debian.org>  Mon,  3 Jul 2000 22:16:20 +0200
+
+madbomber (0.1.7-1) unstable; urgency=low
+
+  * new upstream version (closes: #65539)
+
+ -- Christian T. Steigies <cts@debian.org>  Tue, 13 Jun 2000 23:18:32 +0200
+
+madbomber (0.1.6-1) unstable; urgency=low
+
+  * new upstream version
+
+ -- Christian T. Steigies <cts@debian.org>  Wed, 24 May 2000 23:36:17 +0200
+
+madbomber (0.1.5-1) unstable; urgency=low
+
+  * new upstream version
+  * first upload for debian
+
+ -- Christian T. Steigies <cts@debian.org>  Thu, 10 Feb 2000 21:19:00 +0100
+
+madbomber (0.1.4a-1) unstable; urgency=low
+
+  * Initial Release.
+
+ -- Christian T. Steigies <cts@debian.org>  Sun,  2 Jan 2000 23:07:39 +0100
+
+

@@ -1,0 +1,129 @@
+Index: madbomber-0.2.5/madbomber.c
+===================================================================
+--- madbomber-0.2.5.orig/madbomber.c	2009-10-31 00:29:28.000000000 +0000
++++ madbomber-0.2.5/madbomber.c	2009-10-31 00:33:59.000000000 +0000
+@@ -796,6 +796,12 @@
+   num_rects, highscore, bomber_x, player, frame, vs_mode, spray_count,
+   quick_spray;
+ 
++static unsigned int ocnt=0;
++static int oax=0;
++static int oay=0;
++static int oaz=0;
++static int axs=0;
++
+ #ifdef EMBEDDED
+ int can_continue;
+ #endif
+@@ -868,7 +874,21 @@
+ 	     SDL_Surface * dest_img, SDL_Rect * dest_rect);
+ void my_updaterect(SDL_Surface * surf, int x, int y, int w, int h);
+ void my_fillrect(SDL_Surface * surf, SDL_Rect * dest, Uint32 color);
++int accel_read(int *x);
++
++int accel_read(int *x) {
++	int ax,ay,az;
++	FILE *fd;
+ 
++	fd = fopen("/sys/class/i2c-adapter/i2c-3/3-001d/coord", "r");
++	if(fd != NULL)
++	{
++		if( fscanf((FILE*) fd,"%i %i %i",&ax,&ay,&az) == 3)  *x += ax;
++		fclose(fd);
++	}
++	else return -1;
++	return 0;
++}
+ 
+ /* --- MAIN --- */
+ 
+@@ -1592,6 +1612,47 @@
+ 	    }
+ 	}
+ 
++      /* Read Accelerometer */
++
++	int ax,ay,az;
++/*	int axs = 0;
++	FILE *fd;
++
++	int areads = 0;
++	while (areads<4)
++	{
++		fd = fopen("/sys/class/i2c-adapter/i2c-3/3-001d/coord", "r");
++		if(fd != NULL)
++		{
++			if( fscanf((FILE*) fd,"%i %i %i",&ax,&ay,&az) == 3)  axs += ax;
++			fclose(fd);
++		}
++		areads++;
++		SDL_Delay(2);
++	}
++*/
++	accel_read(&axs);
++
++			ax = -axs/6;
++			axs = 0;
++			if(ocnt>0)
++			{
++				ax=oax+(ax-oax)/2;
++			}
++			ocnt++;
++			oax=ax;
++
++			if (ax > 399) ax = 399;
++			if (ax < -400) ax = -400;
++			ax += 400;
++
++			//ax = 768*(ax/1000.0);
++			x[player] = ax - (16 * width[player]);
++			if (x[player] < 32)
++				x[player] = 32;
++			else if (x[player] > 768 - (width[player] * 32))
++				x[player] = 768 - (width[player] * 32);
++
+ 
+       /* Fire button activates the bomber: */
+       
+@@ -1783,6 +1844,7 @@
+ 	    }
+ 	}
+ 
++      accel_read(&axs);
+ 
+       /* Erase drops: */
+       
+@@ -1995,6 +2057,7 @@
+ 	  addrect(dest);
+ 	}
+       
++      accel_read(&axs);
+       
+       /* Draw the mad bomber: */
+       
+@@ -2084,6 +2147,8 @@
+ 	      addrect(dest);
+ 	    }
+ 	}
++
++      accel_read(&axs);
+       
+       
+       /* If everyone's died, make the bomber happy and show score(s): */
+@@ -2311,6 +2376,7 @@
+ 	    }
+ 	}
+       
++      accel_read(&axs);
+       
+       /* Update the screen: */
+       
+@@ -2348,7 +2414,7 @@
+ 	    }
+ 	}
+ #endif
+-      
++      accel_read(&axs);
+       /* Pause: */
+       
+       if (SDL_GetTicks() < last_time + 33)

@@ -1,0 +1,72 @@
+Index: madbomber-0.2.5/madbomber.c
+===================================================================
+--- madbomber-0.2.5.orig/madbomber.c	2009-10-31 01:57:44.000000000 +0000
++++ madbomber-0.2.5/madbomber.c	2009-10-31 02:04:11.000000000 +0000
+@@ -1619,6 +1619,27 @@
+ 	      
+ 	      quit = 1;
+ 	    }
++	  else if (event.type == SDL_ACTIVEEVENT)
++	    {
++	      if ( event.active.gain == 0)
++	        {
++#ifndef NOSOUND
++	          Mix_PauseMusic();
++#endif
++		  while (SDL_WaitEvent(&event) )
++	          {
++	            if (event.type == SDL_ACTIVEEVENT && event.active.gain == 1 ) break;
++	            if (event.type == SDL_QUIT )
++	            {
++	               quit = 1;
++	              break;
++	            }
++	          }
++	        }
++#ifndef NOSOUND
++	      Mix_ResumeMusic();
++#endif
++	    }
+ 	}
+ 
+       /* Read Accelerometer */
+@@ -2649,6 +2670,28 @@
+ 	      option = TITLE_OPTION_EXIT;
+ 	      key = SDLK_ESCAPE;
+ 	    }
++	  else if (event.type == SDL_ACTIVEEVENT)
++	    {
++	      if ( event.active.gain == 0)
++	        {
++#ifndef NOSOUND
++	          Mix_PauseMusic();
++#endif
++		  while (SDL_WaitEvent(&event) )
++	          {
++	            if (event.type == SDL_ACTIVEEVENT && event.active.gain == 1 ) break;
++	            if (event.type == SDL_QUIT )
++	            {
++	              option = TITLE_OPTION_EXIT;
++		      key = SDLK_ESCAPE;
++	              break;
++	            }
++	          }
++	        }
++#ifndef NOSOUND
++	      Mix_ResumeMusic();
++#endif
++	    }
+ 	}
+ 
+ 
+@@ -4131,8 +4174,9 @@
+     }
+   while (bottom_most != -1);
+ 
++#ifndef NOSOUND
+   Mix_SetPanning(1, 255, 255);
+-
++#endif
+ 
+   /* Play a BIG explosion sound: */
+   

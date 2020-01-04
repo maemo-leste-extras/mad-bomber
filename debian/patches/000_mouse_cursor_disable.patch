@@ -1,0 +1,13 @@
+Index: madbomber-0.2.5/madbomber.c
+===================================================================
+--- madbomber-0.2.5.orig/madbomber.c	2009-08-15 02:42:08.034852572 +0300
++++ madbomber-0.2.5/madbomber.c	2009-08-15 02:54:18.123349022 +0300
+@@ -2761,7 +2761,7 @@
+   /* Set window manager stuff: */
+   
+   SDL_WM_SetCaption("Mad Bomber", "Mad Bomber");
+-  /* SDL_ShowCursor(0); */
++  SDL_ShowCursor(SDL_DISABLE);
+   
+   
+   /* Load graphics: */

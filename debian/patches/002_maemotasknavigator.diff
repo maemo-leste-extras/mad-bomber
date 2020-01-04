@@ -1,0 +1,33 @@
+Index: madbomber-0.2.5/madbomber.c
+===================================================================
+--- madbomber-0.2.5.orig/madbomber.c	2009-08-15 02:54:18.123349022 +0300
++++ madbomber-0.2.5/madbomber.c	2009-08-15 02:54:27.290853334 +0300
+@@ -27,6 +27,8 @@
+ #include <SDL.h>
+ #include <SDL_image.h>
+ #include <math.h>
++#include <SDL/SDL_syswm.h>
++#include <X11/Xutil.h>
+ 
+ /* #ifdef WIN32 */
+ /* #include <windows.h> */
+@@ -2762,6 +2764,19 @@
+   
+   SDL_WM_SetCaption("Mad Bomber", "Mad Bomber");
+   SDL_ShowCursor(SDL_DISABLE);
++  SDL_SysWMinfo info;
++  SDL_VERSION(&info.version);
++  if ( SDL_GetWMInfo(&info) ) {
++    Display *dpy = info.info.x11.display;
++    Window win;
++  
++    if (use_fullscreen)
++      win = info.info.x11.fswindow;
++    else
++      win = info.info.x11.wmwindow;
++    XStoreName(dpy, win, "Mad Bomber");
++  }
++
+   
+   
+   /* Load graphics: */

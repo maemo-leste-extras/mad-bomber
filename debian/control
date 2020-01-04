@@ -1,0 +1,37 @@
+Source: madbomber
+Section: user/games
+Priority: optional
+Maintainer: Mikko Vartiainen <mvartiainen@gmail.com>
+Build-Depends: debhelper (>> 5), libsdl1.2-dev (>=1.2.2-3.3), libsdl-mixer1.2-dev (>=1.2.1-2.2), libsdl-image1.2-dev (>=1.2.1-1.1), libosso-dev, sharutils, quilt, maemo-optify
+Standards-Version: 3.7.3
+XSBC-Bugtracker: https://bugs.maemo.org/enter_bug.cgi?product=Mad%20Bomber
+
+Package: madbomber
+Architecture: any
+Depends: ${shlibs:Depends}, madbomber-data (= ${Source-Version}), suspendprocess
+Description: A Kaboom! clone
+ "Mad Bomber" is a clone of Activision's classic Atari 2600 console
+ game, "Kaboom!," by Larry Kaplan, with spruced-up graphics and
+ sound effects, and music and accelerometer based controls.
+ .
+ The Mad Bomber is loose in the city and he's dropping bombs everywhere!
+ It's your job to catch them before they hit the ground and explode.
+ Luckily, you have a set of trusty buckets to extinguish the bombs with.
+XB-Maemo-Display-Name: Mad Bomber
+XB-Maemo-Icon-26: LyogWFBNICovCnN0YXRpYyBjaGFyICptYWdpY2tbXSA9IHsKLyogY29sdW1ucyByb3dzIGNvbG9ycyBjaGFycy1wZXItcGl4ZWwgKi8KIjMyIDMyIDIxIDEiLAoiICBjIGJsYWNrIiwKIi4gYyAjMTkxOTE5IiwKIlggYyBncmF5MjAiLAoibyBjICMwMDAwN2YiLAoiTyBjICMwMDdmMDAiLAoiKyBjICMwMDdmN2YiLAoiQCBjICM3ZjAwMDAiLAoiIyBjICM3ZjAwN2YiLAoiJCBjICM3ZjdmMDAiLAoiJSBjICM0YzRjNGMiLAoiJiBjICM2NjY2NjciLAoiKiBjIGdyYXk1MCIsCiI9IGMgZ3JlZW4iLAoiLSBjIGN5YW4iLAoiOyBjIHJlZCIsCiI6IGMgeWVsbG93IiwKIj4gYyBncmF5NjAiLAoiLCBjICNiMmIyYjIiLAoiPCBjIGdyYXk4MCIsCiIxIGMgZ3JheTkwIiwKIjIgYyB3aGl0ZSIsCi8qIHBpeGVscyAqLwoiJjs7KiosOio+Pjs7KjsqOyojJDsmQCZAJkAjO0BAJUAiLAoiKiojPjs+KjskOz4qKioqOzsmIyY7JjsmJkAkQCVAQEAiLAoiOyoqOzokOyQkJEAmOzsqJCQqOyomQDsmOyZAJiZAJUAiLAoiKjs+Oj47PiQ+OyRAKj47Kio7IyQ7JiVAJUBAQEBAJUAiLAoiKio7JiomQComQCYkJSY7PjsqOyZAJkAkJiRAI0BAJEAiLAoiPlggLkBYIC4gWFguLi4qOyo7KkAmQCVAQEAkJCVAQCMiLAoiO1guLlgqLi4gJiYuLiBAKiMkIyVAJkAkJCRAJCRAQCUiLAoiPioqKiQmOyYmJkAkJkAqKjsmJEAmQCQjI0AqJDokJEAiLAoiOz46Ozs+OiwkPjsqJCo7O0AmJUAlWFg6OiQ6Ojo6OiQiLAoiKj4+Pj4+KjsqOyokQCYqJiZAJFhAWEAkJD4+Ojo6JCQiLAoiOz47Pio7KkBAKkAqJiYjKiMkQCVYWC4gQFhAKjokQEAiLAoiKjs+PiokQEBAJUAkOyokQEAmI1glLiU+JlguQCNAQCMiLAoiOz4qOywkJComQCQqJjsmJioqKiYlICBYJSoqLkAlQEAiLAoiOyQqOz4jJUBYJSMkJioqPj4mQCVYLiwqLi4uJUBAQCUiLAoiPio7LD5AJiUlJSUqKio+KlglPj4sWC4lKi4gQEAlQCUiLAoiKjsqPj4+PiomJiomKiwqQD4xPDwsPj4mLi4lJUBAQEAiLAoiKjslJSUlJVhYWCUlKipYLDIxMTwsLD4+JiYlWC5YQEAiLAoiJCMqPioqKiYmJiYqPlg+MjExPDwsPj4qJiYlJVhAWEAiLAoiOz5AJiYlJSVYJSUmJSU8MTIxPDwsLD4qKiYlWFguQEAiLAoiQCUqLD4+PiomJSYqJSoxPDE8PDwsPj4qJiYlWC4uQFgiLAoiPiYlQFglWFhYWCUlWD48PDw8PCwsPj4mJiUlWFguLkAiLAoiPj4qPj4qKiolJSVYWCwsLCwsLD4+PioqJiUlWC4uIC4iLAoiKiYmJiUmJSUlWFhYWD4+Piw+Pj4+KiomJiVYWC4gLkAiLAoiPj4+OyY+Pj4mWCVYWD4+Pj4+Pj4qJiYmJSVYWC4gIEAiLAoiJiUlJFglQCUlJVguWCoqKioqKiomJiYlJVhYLiAgIEAiLAoiPj4qKj4+PioqKiVYWCUqKioqKiYmJiUlWFguLi4gLkAiLAoiJUAlI1glWCVYWCVYIC4mJSUlJSUlJVhYLi4uICAgLkAiLAoiPiomJComPiYqLCUlJSVYWCUlWCQuWCVYJi4gJVguJS4iLAoiLCouLCZvKlgmKisuKiolWCYkTzxYJSwlLCVPLC4+KysiLAoiPCo+PiUqLSsmKz4uJipYJSYmTyokJj1YJFguLS4rKyUiLAoiMSsgJSsqJiYrKiogKisrWCYmJSogLiZYPiRPPi4rJisiLAoiPlguJSVvWG9vKi4gKz4uLk9YLiQgLiRPKk8uKk8lWD0iCn07Cg==
+
+
+Package: madbomber-data
+Architecture: all
+Section: games
+Replaces: madbomber (<< 0.1.8-6)
+Description: Datafiles for madbomber
+ "Mad Bomber" is a clone of Activision's classic Atari 2600 console
+ game, "Kaboom!," by Larry Kaplan, with spruced-up graphics and
+ sound effects, and music.
+ .
+ The Mad Bomber is loose in the city and he's dropping bombs everywhere!
+ It's your job to catch them before they hit the ground and explode.
+ Luckily, you have a set of trusty buckets to extinguish the bombs with.
+ .
+ This package contains sound and image files for madbomber

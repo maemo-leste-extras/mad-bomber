@@ -1,0 +1,8 @@
+000_mouse_cursor_disable.patch 
+003_800x480.diff 
+005_accelerometer.diff
+006_controls.diff
+007_exit.diff
+008_sdlflip.diff
+009_activeevent.diff
+010_libosso.diff

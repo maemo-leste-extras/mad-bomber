@@ -1,0 +1,11 @@
+Index: madbomber-0.2.5/madbomber.c
+===================================================================
+@@ -2382,7 +2379,7 @@
+       
+       /* Update the screen: */
+       
+-      SDL_UpdateRects(screen, num_rects, rects);
++      SDL_Flip(screen);
+       
+       
+ #ifndef NOSOUND

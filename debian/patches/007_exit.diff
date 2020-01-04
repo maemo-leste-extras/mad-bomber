@@ -1,0 +1,59 @@
+Index: madbomber-0.2.5/madbomber.c
+===================================================================
+--- madbomber-0.2.5.orig/madbomber.c	2009-09-04 00:50:39.593203110 +0300
++++ madbomber-0.2.5/madbomber.c	2009-09-04 00:52:22.273202093 +0300
+@@ -148,6 +148,7 @@
+   IMG_GAME_OVER,
+   IMG_PRESS_FIRE,
+   IMG_PRESS_ESCAPE,
++  IMG_PRESS_EXIT,
+   IMG_SPRAY_CYAN,
+   IMG_SPRAY_BLACK,
+   IMG_SPRAY_BLUE,
+@@ -263,6 +264,7 @@
+   DATA_PREFIX "images/game/game-over.png",
+   DATA_PREFIX "images/game/press-fire.png",
+   DATA_PREFIX "images/game/press-escape.png",
++  DATA_PREFIX "images/game/press-exit.png",
+   DATA_PREFIX "images/spray-cyan.png",
+   DATA_PREFIX "images/spray-black.png",
+   DATA_PREFIX "images/spray-blue.png",
+@@ -1589,6 +1591,12 @@
+ 	      
+ 	      fire = 1;
+ 	      if (game_over) done = 1;
++
++	      if (bomber_go == 0 && (num_buckets[0] != 0 || num_buckets[1] != 0) && no_active_bombs == 1)
++	        {
++	          if (event.button.x < 2*(images[IMG_PRESS_EXIT] -> w) && event.button.y > 480- 2*(images[IMG_PRESS_EXIT] -> h))
++	            done = 1;
++	        }
+ 	    }
+ 	  else if (event.type == SDL_QUIT)
+ 	    {
+@@ -1665,6 +1673,12 @@
+ 		  dest.y = 480 - (images[IMG_PRESS_FIRE] -> h);
+ 		  dest.w = images[IMG_PRESS_FIRE] -> w;
+ 		  dest.h = images[IMG_PRESS_FIRE] -> h;
++		  erase(dest);
++		  addrect(dest);
++		  dest.x = 0;
++		  dest.y = 480 - (images[IMG_PRESS_EXIT] -> h);
++		  dest.w = images[IMG_PRESS_EXIT] -> w;
++		  dest.h = images[IMG_PRESS_EXIT] -> h;
+ #else
+ 		  dest.x = (800 - (images[IMG_PRESS_FIRE] -> h * 2)) / 2;
+ 		  dest.y = 480 - (images[IMG_PRESS_FIRE] -> w * 2);
+@@ -2220,6 +2234,12 @@
+       if (bomber_go == 0 && (num_buckets[0] != 0 || num_buckets[1] != 0) &&
+ 	  no_active_bombs == 1)
+ 	{
++      dest.x = 0;
++      dest.y = 480 - (images[IMG_PRESS_EXIT] -> h);
++      dest.w = images[IMG_PRESS_EXIT] -> w;
++      dest.h = images[IMG_PRESS_EXIT] -> h;
++      my_blit(images[IMG_PRESS_EXIT], NULL, screen, &dest);
++      addrect(dest);
+ 	  if ((frame % 30) == 0)
+ 	    {
+ #ifndef EMBEDDED
